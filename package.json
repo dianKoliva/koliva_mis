@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dianKoliva/koliva_mis#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.10"
+    "mongoose": "^6.0.10",
+    "nodemon": "^2.0.13"
   }
 }
