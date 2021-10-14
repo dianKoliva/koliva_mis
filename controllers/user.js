@@ -6,7 +6,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    console.log(req);
+    console.log(req.body);
+})
+router.put('/', (req, res) => {
+    console.log(req.body);
+});
+
+router.delete('/', (req, res) => {
+    console.log("No way");
 })
 
 module.exports = router;

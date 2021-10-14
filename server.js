@@ -17,10 +17,6 @@ app.use('/user', users);
 
 
 
-
-
-
-
 app.listen(port, () => {
-    console.log(port);
+
 })
