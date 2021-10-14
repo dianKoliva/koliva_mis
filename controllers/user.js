@@ -23,16 +23,12 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {
 
-    var user_instance = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
+    var email = req.body.email;
+    var password = req.body.password;
+
+    User.findOne({
+        email: email,
     })
-
-    user_instance.save(function(err) {
-        if (err) console.log(err);
-
-    });
 
 })
 router.put('/', (req, res) => {
