@@ -1,3 +1,4 @@
+const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 var User = require('../models/userModel');
@@ -26,9 +27,12 @@ router.post('/login', (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
 
-    User.findOne({
-        email: email,
-    })
+    user = User.findOne({
+            email: email,
+        })
+        // res.send(JSON.stringify({ user: user }));
+
+    console.log(user);
 
 })
 router.put('/', (req, res) => {
