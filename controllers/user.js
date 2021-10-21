@@ -2,6 +2,11 @@ const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 var User = require('../models/userModel');
+const jwt=require("jsonwebtoken");
+const app = express();
+
+
+app.use(jwt)
 
 router.get('/', (req, res) => {
     res.send("no users yet");
