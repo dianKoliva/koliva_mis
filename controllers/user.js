@@ -12,10 +12,64 @@ const checker=require("./middle/check")
 
 
 router.get('/',checker, (req, res,next) => {
+
+    const user= User.find()
+    .exec()
+    .then(
+        ans=>{
+            // if(ans.length>=0){
+                res.json({
+                    users:ans
+                })
+            // }
+            // else{
+            //     res.status(404).json({
+            //         message:"No data"
+            //     })
+            // }
+            
+        }
+    
+)
+.catch(
+    err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    }
+
+)
     
 })
 
-router.post('/signup', (req, res) => {
+
+router.get('/:id',checker, (req, res,next) => {
+
+  
+
+    const user= User.findById(req.params.id)
+    .exec()
+    .then(
+        ans=>{
+            res.json({
+                users:ans
+            })
+        }
+)
+.catch(
+    err=>{
+        console.log(err);
+        res.status(500).json({
+            message:"user not found"
+        })
+    }
+
+)
+    
+})
+
+router.post('/signup', (req, res,next) => {
 
 
     User.find({email:req.body.email})
@@ -121,5 +175,55 @@ router.post("/login",(req,res,next)=>{
     
 })
 
+
+router.put("/update/:id",checker,(req,res,next)=>{
+   var id=req.params.id;
+   const updateOps={};
+
+   for(const ops of req.body){
+       updateOps[ops.propName]=ops.value
+   }
+
+   User.update({_id:id}, {$set:updateOps})
+   .exec()
+   .then( resp=>{
+      res.status(200).json(result) ;
+   }
+    )
+   .catch(
+    err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    }
+
+)
+
+})
+router.delete("/delete/:id",checker,(req,res,next)=>{
+
+    var id=req.params.id;
+
+    User.remove({
+        _id:id
+    })
+    .exec()
+    .then(
+        result=>{
+            res.status(200).json({message:"deleted"})
+        }
+       
+    )
+    .catch(
+        err=>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        }
+
+    )
+})
 
 module.exports = router;

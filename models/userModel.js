@@ -7,9 +7,13 @@ var User = new Schema({
     email: { type: String,
          required: true,
           unique:true,
-           match:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ },
+        match:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ },
     password: { type: String, required: true },
-    status: { type: String, default: "active", required: true }
+    status: { 
+        type: String,
+        enum: ['ACTIVE', 'INACTIVE'],
+        default: 'ACTIVE'
+     }
 });
 
 // Compile model from schema
