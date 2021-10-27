@@ -3,7 +3,9 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/userModel');
 const jwt=require("jsonwebtoken");
+const mongoose= require('mongoose');
 const app = express();
+const bcrypt = require('bcrypt')
 
 
 
@@ -15,6 +17,7 @@ router.get('/', (req, res) => {
 router.post('/signup', (req, res) => {
 
     var user_instance = new User({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
