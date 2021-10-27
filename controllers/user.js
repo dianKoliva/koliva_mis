@@ -226,4 +226,8 @@ router.delete("/delete/:id",checker,(req,res,next)=>{
     )
 })
 
+// router.delete("/delete",checker,(req,res,next)=>{
+
+// })
+
 module.exports = router;
