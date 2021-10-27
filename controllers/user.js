@@ -16,17 +16,41 @@ router.get('/', (req, res) => {
 
 router.post('/signup', (req, res) => {
 
-    var user_instance = new User({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
+    bcrypt.hash(req.body.password,10,(err,hash)=>{
+
+        if(err){
+
+            return res.status(500).json({
+                error:err
+            })
+        }
+        else{
+            const user = new User({
+
+                _id:new mongoose.Types.ObjectId(),
+                email:req.body.email,
+                password:hash
+            });
+            user
+            .save()
+            .then(result=>{
+                res.status(201).json({
+                    message:"User Created"
+                })
+            })
+            .catch(
+                err=>{
+                    console.log(err);
+                    res.status(500).json({
+                        error:err
+                    })
+                }
+
+            )
+        }
+
     })
-
-    user_instance.save(function(err) {
-        if (err) console.log(err);
-
-    });
+  
 
 })
 
