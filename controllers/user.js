@@ -6,7 +6,7 @@ const jwt=require("jsonwebtoken");
 const app = express();
 
 
-app.use(jwt)
+
 
 router.get('/', (req, res) => {
     res.send("no users yet");
