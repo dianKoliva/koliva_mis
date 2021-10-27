@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const port = 4590;
 const bodyParser = require("body-parser");
-
-
-
-
-
-
+require('dotenv').config();
 require("./db/db");
+
+
+
+
+
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -23,6 +24,8 @@ app.use('/user', users);
 
 
 
-app.listen(port, () => {
 
+
+app.listen(port, () => {
+ console.log(`Running on port: ${port}`)
 })

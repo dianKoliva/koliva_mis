@@ -7,7 +7,7 @@ const mongoose= require('mongoose');
 const app = express();
 const bcrypt = require('bcrypt')
 
-
+console.log(process.env.jwt_key);
 
 
 router.get('/', (req, res) => {
@@ -16,63 +16,109 @@ router.get('/', (req, res) => {
 
 router.post('/signup', (req, res) => {
 
-    bcrypt.hash(req.body.password,10,(err,hash)=>{
 
-        if(err){
-
-            return res.status(500).json({
-                error:err
-            })
+    User.find({email:req.body.email})
+    .exec()
+    .then(user=>{
+        if(user.length>=1){
+            return res.status(409).json({message:"Email exists"})
         }
         else{
-            const user = new User({
+            bcrypt.hash(req.body.password,10,(err,hash)=>{
 
-                _id:new mongoose.Types.ObjectId(),
-                email:req.body.email,
-                password:hash
-            });
-            user
-            .save()
-            .then(result=>{
-                res.status(201).json({
-                    message:"User Created"
-                })
-            })
-            .catch(
-                err=>{
-                    console.log(err);
-                    res.status(500).json({
+                if(err){
+        
+                    return res.status(500).json({
                         error:err
                     })
                 }
-
-            )
+                else{
+                    const user = new User({
+        
+                        _id:new mongoose.Types.ObjectId(),
+                        email:req.body.email,
+                        name:req.body.name,
+                        password:hash
+                    });
+                    user
+                    .save()
+                    .then(result=>{
+                        res.status(201).json({
+                            message:"User Created"
+                        })
+                       
+                    })
+                    .catch(
+                        err=>{
+                            console.log(err);
+                            res.status(500).json({
+                                error:err
+                            })
+                        }
+        
+                    )
+                }
+        
+            })
         }
-
     })
+
+
+ 
   
 
 })
 
-router.post('/login', (req, res) => {
+router.post("/login",(req,res,next)=>{
+    User.find({email:req.body.email})
+    .exec()
+    .then(
+        user=>{
+            if(user.length<1){
+                return res.status(401)
+                .json({
+                    message:"invalid user"
+                })
+            }
+            else{
+                bcrypt.compare(req.body.password,user[0].password,(err,ans)=>{
 
-    var email = req.body.email;
-    var password = req.body.password;
+                    if(err){
+        
+                        return res.status(500).json({
+                            error:err
+                        })
+                    }
+                   
 
-    user = User.findOne({
-            email: email,
-        })
-        // res.send(JSON.stringify({ user: user }));
+                    if(ans){
+                      const token=  jwt.sign({
 
-    console.log(user);
+                            email:user[0].email,
+                            userId:user[0]._id
 
+                        },process.env.jwt_key,{expiresIn:"1h"});
+
+                        return res.status(200).json({
+                            message:"loged in",
+                            token:token
+                        })
+                    }
+                })
+            }
+        }
+    )
+    .catch(
+        err=>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        }
+
+    )
+    
 })
-router.put('/', (req, res) => {
-    console.log(req.body);
-});
 
-router.delete('/', (req, res) => {
-    console.log("No way");
-})
 
 module.exports = router;
