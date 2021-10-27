@@ -7,11 +7,12 @@ const mongoose= require('mongoose');
 const app = express();
 const bcrypt = require('bcrypt')
 
-console.log(process.env.jwt_key);
+const checker=require("./middle/check")
 
 
-router.get('/', (req, res) => {
-    res.send("no users yet");
+
+router.get('/',checker, (req, res,next) => {
+    
 })
 
 router.post('/signup', (req, res) => {
