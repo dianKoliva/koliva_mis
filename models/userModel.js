@@ -11,8 +11,8 @@ var User = new Schema({
     password: { type: String, required: true },
     status: { 
         type: String,
-        enum: ['ACTIVE', 'INACTIVE'],
-        default: 'ACTIVE'
+        enum: ['active', 'inactive'],
+        default: 'active'
      }
 });
 
