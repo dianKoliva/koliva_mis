@@ -11,7 +11,7 @@ require('dotenv').config();
 require("./db/db");
 
 
-var users = require("./controllers/user.js");
+var users = require("./routes/userRoutes.js");
 const { version } = require('mongoose');
 
 
@@ -26,11 +26,6 @@ app.use('/user', users);
 app.use(cors());
 
 
-app.use((req,res,next)=>{
-    const error =new Error("Route not found");
-   
-    next(error)
-})
 
 
 const options ={
@@ -58,4 +53,10 @@ app.use("/api-docs", sUI.serve,sUI.setup(specs))
 
 app.listen(port, () => {
  console.log(`Running on port: ${port}`)
+})
+
+app.use((req,res,next)=>{
+    const error =new Error("Route not found");
+   
+    next(error)
 })

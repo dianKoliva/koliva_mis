@@ -1,32 +1,18 @@
-const { response } = require('express');
-var express = require('express');
-var router = express.Router();
 var User = require('../models/userModel');
-const jwt=require("jsonwebtoken");
-const mongoose= require('mongoose');
-const app = express();
 const bcrypt = require('bcrypt')
-
-const checker=require("./middle/check")
-
-
-
-router.get('/',checker, (req, res,next) => {
+const mongoose= require('mongoose');
+const { response } = require('express');
+const jwt=require("jsonwebtoken");
+exports.getAllUsers=(req, res,next) => {
 
     const user= User.find()
     .exec()
     .then(
         ans=>{
-            // if(ans.length>=0){
                 res.json({
                     users:ans
                 })
-            // }
-            // else{
-            //     res.status(404).json({
-            //         message:"No data"
-            //     })
-            // }
+           
             
         }
     
@@ -41,10 +27,8 @@ router.get('/',checker, (req, res,next) => {
 
 )
     
-})
-
-
-router.get('/:id',checker, (req, res,next) => {
+}
+exports.getById=(req, res,next) => {
 
   
 
@@ -67,9 +51,9 @@ router.get('/:id',checker, (req, res,next) => {
 
 )
     
-})
+}
 
-router.post('/signup', (req, res,next) => {
+exports.signUp=(req, res,next) => {
 
 
     User.find({email:req.body.email})
@@ -122,9 +106,9 @@ router.post('/signup', (req, res,next) => {
  
   
 
-})
+}
 
-router.post("/login",(req,res,next)=>{
+exports.login=(req,res,next)=>{
     User.find({email:req.body.email})
     .exec()
     .then(
@@ -173,35 +157,35 @@ router.post("/login",(req,res,next)=>{
 
     )
     
-})
+}
 
-
-router.put("/update/:id",checker,(req,res,next)=>{
-   var id=req.params.id;
-   const updateOps={};
-
-   for(const ops of req.body){
-       updateOps[ops.propName]=ops.value
-   }
-
-   User.update({_id:id}, {$set:updateOps})
-   .exec()
-   .then( resp=>{
-      res.status(200).json(result) ;
-   }
-    )
-   .catch(
-    err=>{
-        console.log(err);
-        res.status(500).json({
-            error:err
-        })
+exports.update=(req,res,next)=>{
+    var id=req.params.id;
+    const updateOps={};
+ 
+    for(const ops of req.body){
+        updateOps[ops.propName]=ops.value
     }
+ 
+    User.update({_id:id}, {$set:updateOps})
+    .exec()
+    .then( resp=>{
+       res.status(200).json(result) ;
+    }
+     )
+    .catch(
+     err=>{
+         console.log(err);
+         res.status(500).json({
+             error:err
+         })
+     }
+ 
+ )
+ 
+ }
 
-)
-
-})
-router.delete("/delete/:id",checker,(req,res,next)=>{
+exports.deleteById=(req,res,next)=>{
 
     var id=req.params.id;
 
@@ -224,10 +208,4 @@ router.delete("/delete/:id",checker,(req,res,next)=>{
         }
 
     )
-})
-
-// router.delete("/delete",checker,(req,res,next)=>{
-
-// })
-
-module.exports = router;
+}
