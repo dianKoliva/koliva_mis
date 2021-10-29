@@ -43,7 +43,6 @@ exports.getById=(req, res,next) => {
 )
 .catch(
     err=>{
-        console.log(err);
         res.status(500).json({
             message:"user not found"
         })
@@ -161,38 +160,63 @@ exports.login=(req,res,next)=>{
 
 exports.update=(req,res,next)=>{
     var id=req.params.id;
-    const updateOps={};
+
+
+    const user= User.findById(req.params.id)
+    .exec()
+    .then(
+        
+        resp=>{
+                let updateOps={};
     const body=req.body;
  
     for(const ops in body){
-        // updateOps[ops.propName]=ops.value
-        console.log(ops);
+        updateOps[ops]=body[ops];
     }
     
-    // console.log(updateOps);
-    
  
-//     User.update({_id:id}, {$set:updateOps})
-//     .exec()
-//     .then( resp=>{
-//        res.status(200).json(result) ;
-//     }
-//      )
-//     .catch(
-//      err=>{
-//          console.log(err);
-//          res.status(500).json({
-//              error:err
-//          })
-//      }
+    User.updateOne({_id:id}, {$set:updateOps})
+    .exec()
+    .then( resp=>{
+       res.status(201).json(resp) ;
+    }
+     )
+    .catch(
+     err=>{
+         console.log(err);
+         res.status(500).json({
+             error:err
+         })
+     }
  
-//  )
+ )
  
+        }
+        
+)
+.catch(
+    err=>{
+
+        res.status(500).json({
+            message:"user not found"
+        })
+    }
+)
+
+        
+
+
+
  }
 
 exports.deleteById=(req,res,next)=>{
 
-    var id=req.params.id;
+
+    const user= User.findById(req.params.id)
+    .exec()
+    .then(
+        ans=>{
+              let id=req.params.id;
 
     User.remove({
         _id:id
@@ -213,4 +237,18 @@ exports.deleteById=(req,res,next)=>{
         }
 
     )
+        }
+)
+.catch(
+    err=>{
+        res.status(404).json({
+           error:"user not found"
+        })
+    }
+
+)
+
+
+
+  
 }
