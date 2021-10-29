@@ -162,13 +162,14 @@ exports.login=(req,res,next)=>{
 exports.update=(req,res,next)=>{
     var id=req.params.id;
     const updateOps={};
-    const body=[req.body]
+    const body=req.body;
  
-    for(const ops of body){
-        updateOps[ops.propName]=ops.value
+    for(const ops in body){
+        // updateOps[ops.propName]=ops.value
+        console.log(ops);
     }
     
-    console.log(updateOps);
+    // console.log(updateOps);
     
  
 //     User.update({_id:id}, {$set:updateOps})
