@@ -13,9 +13,9 @@ router.post('/signup',userControl.signUp )
 router.post("/login",userControl.login)
 
 
-router.get('/',userControl.getAllUsers )
+router.get('/',checker,userControl.getAllUsers )
 
-router.get('/:id', userControl.getById)
+router.get('/:id',checker, userControl.getById)
 
 
 

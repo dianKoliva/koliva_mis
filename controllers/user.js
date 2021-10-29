@@ -162,26 +162,32 @@ exports.login=(req,res,next)=>{
 exports.update=(req,res,next)=>{
     var id=req.params.id;
     const updateOps={};
+    const body=req.body
  
-    for(const ops of req.body){
-        updateOps[ops.propName]=ops.value
+    // for(const ops of req.body){
+    //     updateOps[ops.propName]=ops.value
+    // }
+    console.log(body);
+    for( var i of body){
+        console.log(i);
     }
+    
  
-    User.update({_id:id}, {$set:updateOps})
-    .exec()
-    .then( resp=>{
-       res.status(200).json(result) ;
-    }
-     )
-    .catch(
-     err=>{
-         console.log(err);
-         res.status(500).json({
-             error:err
-         })
-     }
+//     User.update({_id:id}, {$set:updateOps})
+//     .exec()
+//     .then( resp=>{
+//        res.status(200).json(result) ;
+//     }
+//      )
+//     .catch(
+//      err=>{
+//          console.log(err);
+//          res.status(500).json({
+//              error:err
+//          })
+//      }
  
- )
+//  )
  
  }
 
