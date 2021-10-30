@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var datetime = new Date();
+
+
 var Preform = new Schema({
     _id:mongoose.Schema.Types.ObjectId,
     plate_no: { type: String, required: true },
@@ -21,6 +24,7 @@ var Preform = new Schema({
     disk_up:{ type: Number, required: true },
     paint_up:{ type: Number, required: true },
     ressort_up:{ type: Number, required: true },
+    date:{type:Date,default:datetime}
 })
 
 var Preform=mongoose.model('Preform',Preform);

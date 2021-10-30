@@ -6,12 +6,13 @@ const morgan =require( "morgan")
 const sUI =require('swagger-ui-express');
 const sDoc=require('swagger-jsdoc');
 const cors =require('cors');
+var form=require("./routes/preformRoutes")
+var users = require("./routes/userRoutes.js");
 
 require('dotenv').config();
 require("./db/db");
 
 
-var users = require("./routes/userRoutes.js");
 const { version } = require('mongoose');
 
 
@@ -22,8 +23,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use('/user', users);
 app.use(cors());
+
+
+app.use('/user', users);
+app.use('/form', form);
+
 
 
 
