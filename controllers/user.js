@@ -19,7 +19,7 @@ exports.getAllUsers=(req, res,next) => {
 )
 .catch(
     err=>{
-        console.log(err);
+        
         res.status(500).json({
             error:err
         })
@@ -88,7 +88,7 @@ exports.signUp=(req, res,next) => {
                     })
                     .catch(
                         err=>{
-                            console.log(err);
+                            
                             res.status(500).json({
                                 error:err
                             })
@@ -148,7 +148,7 @@ exports.login=(req,res,next)=>{
     )
     .catch(
         err=>{
-            console.log(err);
+           
             res.status(500).json({
                 error:err
             })
@@ -183,7 +183,7 @@ exports.update=(req,res,next)=>{
      )
     .catch(
      err=>{
-         console.log(err);
+        
          res.status(500).json({
              error:err
          })
@@ -230,7 +230,7 @@ exports.deleteById=(req,res,next)=>{
     )
     .catch(
         err=>{
-            console.log(err);
+   
             res.status(500).json({
                 error:err
             })

@@ -7,11 +7,11 @@ const formControl=require("../controllers/preform.js")
 
 const checker=require("../middle/check");
 
-router.get("/",formControl.getAll);
-router.get("/:id",formControl.getById)
-router.post("/register",formControl.saveForm)
-router.put("/update/:id",formControl.update);
-router.delete("/delete/:id",formControl.deleteById);
+router.get("/",checker,formControl.getAll);
+router.get("/:id",checker,formControl.getById)
+router.post("/register",checker,formControl.saveForm)
+router.put("/update/:id",checker,formControl.update);
+router.delete("/delete/:id",checker,formControl.deleteById);
 
 
 

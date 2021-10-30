@@ -20,9 +20,9 @@ exports.getAll=(req, res,next) => {
 )
 .catch(
     err=>{
-        console.log(err);
+ 
         res.status(500).json({
-            error:err
+            error:err.message
         })
     }
 
@@ -52,7 +52,8 @@ const form =new Form({
     baguette_up:req.body.baguette_up,
     disk_up:req.body.disk_up,
     paint_up:req.body.paint_up,
-    ressort_up:req.body.ressort_up
+    ressort_up:req.body.ressort_up,
+    total:req.body.total
 })
             
 
@@ -62,8 +63,8 @@ form .save()
   message:"Form Created"  }) })
 
  .catch(
-err=>{console.log(err);
-res.status(500).json({ error:err  }) } )
+err=>{
+res.status(500).json({ error:err.message  }) } )
 
 }
 
@@ -114,9 +115,9 @@ exports.update=(req,res,next)=>{
      )
     .catch(
      err=>{
-         console.log(err);
+         
          res.status(500).json({
-             error:err
+             error:err.message
          })
      }
  
@@ -162,9 +163,9 @@ exports.update=(req,res,next)=>{
     )
     .catch(
         err=>{
-            console.log(err);
+         
             res.status(500).json({
-                error:err
+                error:err.message
             })
         }
 

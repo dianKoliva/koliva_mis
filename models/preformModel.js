@@ -24,6 +24,7 @@ var Preform = new Schema({
     disk_up:{ type: Number, required: true },
     paint_up:{ type: Number, required: true },
     ressort_up:{ type: Number, required: true },
+    total:{ type: Number, required: true },
     date:{type:Date,default:datetime}
 })
 
