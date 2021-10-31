@@ -8,15 +8,14 @@ const sDoc=require('swagger-jsdoc');
 const cors =require('cors');
 var form=require("./routes/preformRoutes")
 var users = require("./routes/userRoutes.js");
+const swaggerDocument = require("./swagger.json");
 
 require('dotenv').config();
 require("./db/db");
 
+app.use("/api-docs",sUI.serve, sUI.setup(swaggerDocument));
 
 const { version } = require('mongoose');
-
-
-
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({
@@ -33,27 +32,6 @@ app.use('/form', form);
 
 
 
-const options ={
-    definition:{
-        openapi:"3.0.0",
-        info:{
-            title:"KM API",
-            version:"1.0.0",
-            description:"Apis for Koliva motors"
-        },
-        servers:[
-            {
-                url:"http//localhost:4000"
-            }
-        ]
-       
-    },
-    apis:["./routes/*.js"]
-}
-
-const specs= sDoc(options);
-
-app.use("/api-docs", sUI.serve,sUI.setup(specs))
 
 
 app.listen(port, () => {

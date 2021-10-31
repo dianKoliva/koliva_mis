@@ -25,7 +25,12 @@ var Preform = new Schema({
     paint_up:{ type: Number, required: true },
     ressort_up:{ type: Number, required: true },
     total:{ type: Number, required: true },
-    date:{type:Date,default:datetime}
+    date:{type:Date,default:datetime},
+    status: { 
+        type: String,
+        enum: ['aproved', 'pending'],
+        default: 'pending'
+     }
 })
 
 var Preform=mongoose.model('Preform',Preform);

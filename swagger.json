@@ -1,0 +1,1312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.4",
+    "title": "KM APIs Documention",
+    "description": "KM APIS",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users"
+    },
+    {
+      "name": "Forms",
+      "description": "API for forms"
+    }
+  ],
+  "schemes": ["https", "http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/users/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User signup",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user registered!",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Sign in",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User credentials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "phone_number": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "User authenticated.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dactivity": {
+      "post": {
+        "tags": ["DayActivity"],
+        "summary": "Register day activity",
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "Activity to add",
+            "schema": {
+              "$ref": "#/definitions/DayActivity"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New activity is registered",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["DayActivity"],
+        "summary": "Get all Activities",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dactivity/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete activity with give ID",
+        "tags": ["DayActivity"],
+        "responses": {
+          "200": {
+            "description": "Activity is Deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dactivity/byid/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["DayActivity"],
+        "summary": "Get activity with given ID",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Found.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dactivity/update/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update activity with give ID",
+        "tags": ["DayActivity"],
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "New Activity updates",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dactivity/pay/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "summary": "Make payment to the activity with give ID",
+        "tags": ["DayActivity"],
+        "parameters": [
+          {
+            "name": "Payment",
+            "in": "body",
+            "description": "Activity payment",
+            "schema": {
+              "$ref": "#/definitions/DayServicePayment"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment done.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/night.ng": {
+      "post": {
+        "tags": ["NightActivityNG"],
+        "summary": "Register night activity",
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "Activity to add",
+            "schema": {
+              "$ref": "#/definitions/NightActivityNG"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New activity is registered",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["NightActivityNG"],
+        "summary": "Get all Activities",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/night.ng/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete activity with give ID",
+        "tags": ["NightActivityNG"],
+        "responses": {
+          "200": {
+            "description": "Activity is Deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["NightActivityNG"],
+        "summary": "Get activity with given ID",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Found.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update activity with give ID",
+        "tags": ["NightActivityNG"],
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "New Activity updates",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+
+    "/night.rm": {
+      "post": {
+        "tags": ["NightActivityRM"],
+        "summary": "Register night activity",
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "Activity to add",
+            "schema": {
+              "$ref": "#/definitions/NightActivityRM"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New activity is registered",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["NightActivityRM"],
+        "summary": "Get all Activities",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/night.rm/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of activity",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete activity with give ID",
+        "tags": ["NightActivityRM"],
+        "responses": {
+          "200": {
+            "description": "Activity is Deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["NightActivityRM"],
+        "summary": "Get activity with given ID",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Found.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update activity with give ID",
+        "tags": ["NightActivityRM"],
+        "parameters": [
+          {
+            "name": "activity",
+            "in": "body",
+            "description": "New Activity Updates",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+
+    "/group": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Get all groups",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/group/byid/{id}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Get group by id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": ["Group"]
+            }
+          }
+        }
+      }
+    },
+    "/group/location/{location}": {
+      "get": {
+        "tags": ["Group"],
+        "summary": "Get groups by location",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": []
+            }
+          }
+        }
+      }
+    },
+    "/roles": {
+      "get": {
+        "tags": ["Role"],
+        "summary": "Get all roles",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "tags": ["Role"],
+        "summary": "Get role by id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": ["Role"]
+            }
+          }
+        }
+      }
+    },
+    "/rent": {
+      "get": {
+        "tags": ["Rent"],
+        "summary": "Get all Rents",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Rent"],
+        "summary": "Register Rent",
+        "parameters": [
+          {
+            "name": "Rent",
+            "in": "body",
+            "description": "Rent to add",
+            "schema": {
+              "$ref": "#/definitions/Rent"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New Rent is registered",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/rent/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of Rent",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Rent"],
+        "summary": "Get Rent with given ID",
+        "responses": {
+          "200": {
+            "description": "Rent found",
+            "schema": {
+              "$ref": "#/definitions/Rent"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Rent with given ID",
+        "tags": ["Rent"],
+        "responses": {
+          "200": {
+            "description": "Rent is deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Make payment for Rent with given ID",
+        "tags": ["Rent"],
+        "parameters": [
+          {
+            "name": "payment",
+            "in": "body",
+            "description": "Amount and payment date",
+            "schema": {
+              "$ref": "#/definitions/Rent_Payment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment done.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/rent/send-reminder": {
+      "post": {
+        "tags": ["Rent"],
+        "summary": "Send reminder to renter.",
+        "parameters": [
+          {
+            "name": "Request details",
+            "in": "body",
+            "description": "Request details",
+            "schema": {
+              "required": ["email", "first_name"],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New Rent is registered",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/invoice": {
+      "get": {
+        "tags": ["Invoice"],
+        "summary": "Get invoices. You can add filters as query params.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Invoice"],
+        "summary": "Register Invoice",
+        "parameters": [
+          {
+            "name": "Invoice",
+            "in": "body",
+            "description": "Invoice to add",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New Invoice Registered.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/invoice/{id}": {
+      "get": {
+        "tags": ["Invoice"],
+        "summary": "Get Invoice by id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": ["Invoice"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "role",
+        "password"
+      ],
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "phone_number": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "role": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "DayActivity": {
+      "required": [
+        "plate_number",
+        "car_type",
+        "customer_name",
+        "phone_number",
+        "taker_fname",
+        "taker_lname",
+        "taker_number"
+      ],
+      "properties": {
+        "plate_number": {
+          "type": "string"
+        },
+        "car_type": {
+          "type": "string"
+        },
+        "entry_date": {
+          "type": "string"
+        },
+        "out_date": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "taker_fname": {
+          "type": "string"
+        },
+        "taker_lname": {
+          "type": "string"
+        },
+        "taker_number": {
+          "type": "string"
+        },
+        "service": {
+          "type": "array"
+        },
+        "amount_to_pay": {
+          "type": "number"
+        },
+        "amount_payed": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        },
+        "registered_by": {
+          "type": "string"
+        }
+      }
+    },
+    "NightActivityRM": {
+      "required": [
+        "plate_number",
+        "car_type",
+        "driver_name",
+        "phone_number",
+        "taker_name",
+        "taker_number",
+        "entry_date"
+      ],
+      "properties": {
+        "plate_number": {
+          "type": "string"
+        },
+        "car_type": {
+          "type": "string"
+        },
+        "entry_date": {
+          "type": "string"
+        },
+        "driver_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "taker_name": {
+          "type": "string"
+        },
+        "taker_number": {
+          "type": "string"
+        },
+        "washed": {
+          "type": "string"
+        },
+        "car_problem": {
+          "type": "string"
+        },
+        "agency": {
+          "type": "string"
+        }
+      }
+    },
+    "NightActivityNG": {
+      "required": [
+        "plate_number",
+        "car_type",
+        "driver_name",
+        "phone_number",
+        "wash_group",
+        "entry_date"
+      ],
+      "properties": {
+        "plate_number": {
+          "type": "string"
+        },
+        "car_type": {
+          "type": "string"
+        },
+        "entry_date": {
+          "type": "string"
+        },
+        "driver_name": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "wash_group": {
+          "type": "string"
+        },
+        "washed": {
+          "type": "string"
+        },
+        "car_problem": {
+          "type": "string"
+        },
+        "agency": {
+          "type": "string"
+        }
+      }
+    },
+    "Service": {
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Role": {
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Group": {
+      "required": ["name", "members", "location"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "Rent": {
+      "required": [
+        "first_name",
+        "last_name",
+        "phone_number",
+        "occupation",
+        "amount_to_pay"
+      ],
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        },
+        "amount_to_pay": {
+          "type": "number"
+        },
+        "amount_payed": {
+          "type": "number"
+        },
+        "amount_remaining": {
+          "type": "number"
+        },
+        "payment_date": {
+          "type": "string"
+        },
+        "payment_status": {
+          "type": "string"
+        },
+        "registration_date": {
+          "type": "string"
+        }
+      }
+    },
+    "Rent_Payment": {
+      "required": ["amount_payed", "payment_date"],
+      "properties": {
+        "amount_payed": {
+          "type": "number"
+        },
+        "payment_date": {
+          "type": "string"
+        }
+      }
+    },
+    "DayServicePayment": {
+      "required": ["amount_payed"],
+      "properties": {
+        "out_date": {
+          "type": "string"
+        },
+        "amount_to_pay": {
+          "type": "number"
+        },
+        "amount_payed": {
+          "type": "number"
+        }
+      }
+    },
+    "Invoice": {
+      "properties": {
+        "period_type": {
+          "type": "string"
+        },
+        "from_date": {
+          "type": "string"
+        },
+        "to_date": {
+          "type": "string"
+        },
+        "bus": {
+          "properties": {
+            "number": {
+              "type": "number"
+            },
+            "unit_price": {
+              "type": "number"
+            }
+          }
+        },
+        "coaster": {
+          "properties": {
+            "number": {
+              "type": "number"
+            },
+            "unit_price": {
+              "type": "number"
+            }
+          }
+        },
+        "sub_total": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
