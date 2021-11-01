@@ -19,8 +19,8 @@ router.get('/:id',checker, userControl.getById)
 
 
 
-router.put("/update/:id",userControl.update)
-router.delete("/delete/:id",userControl.deleteById);
+router.put("/:id",userControl.update)
+router.delete("/:id",userControl.deleteById);
 
 
 

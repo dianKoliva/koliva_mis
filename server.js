@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.use('/user', users);
-app.use('/form', form);
+app.use('/km/users', users);
+app.use('/km/form', form);
 
 
 
