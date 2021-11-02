@@ -4,7 +4,9 @@ const { response, request } = require('express');
 const jwt=require("jsonwebtoken");
 var Form = require('../models/preformModel');
 
-exports.getAll=(req, res,next) => {
+const checker=require("../middle/check")
+
+exports.getAll=(checker,req, res,next) => {
 
     const pre= Form.find()
     .exec()
@@ -30,7 +32,7 @@ exports.getAll=(req, res,next) => {
     
 }
 
-exports.saveForm=(req, res,next) => {
+exports.saveForm=(checker,req, res,next) => {
 
 const form =new Form({
     _id:new mongoose.Types.ObjectId(),
@@ -68,7 +70,7 @@ res.status(500).json({ error:err.message  }) } )
 
 }
 
-exports.getById=(req, res,next) => {
+exports.getById=(checker,req, res,next) => {
 
   
 
@@ -92,7 +94,7 @@ exports.getById=(req, res,next) => {
     
 }
 
-exports.update=(req,res,next)=>{
+exports.update=(checker,req,res,next)=>{
     var id=req.params.id;
     const form= Form.findById(req.params.id)
     .exec()
