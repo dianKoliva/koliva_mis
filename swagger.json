@@ -170,6 +170,93 @@
           }
         }
       }
+    },
+    "/forms": {
+      "get": {
+        "tags": ["Forms"],
+        "summary": "Get forms.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authentication token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+    ,  "/forms/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of form that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "Authentication token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Forms"],
+        "summary": "Get form with given ID",
+        "responses": {
+          "200": {
+            "description": "Form is found",
+            "schema": {
+              "$ref": "#/definitions/Form"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
     }
     
   },
@@ -192,6 +279,82 @@
           "uniqueItems": true
         }
       }
+    },
+  
+    "Form": {
+      "required": [
+        "plate_no","type", "brand", "chassis_no",
+
+        "chassis_quantity","screw_quantity","baguette_quantity",
+        "disk_quantity","paint_quantity","ressort_quantity",
+
+        "chassis_up","screw_up","baguette_up","disk_up","paint_up",
+        "ressort_up"," total"
+      ],
+      
+      "properties": {
+        "plate_no": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "chassis_no": {
+          "type": "string"
+        },
+
+        
+
+        "chassis_quantity": {
+          "type": "Number"
+        },
+        "screw_quantity": {
+          "type": "Number"
+        },
+        "baguette_quantity": {
+          "type": "Number"
+        },
+        "disk_quantity": {
+          "type": "Number"
+        },
+        "paint_quantity": {
+          "type": "Number"
+        },
+        "ressort_quantity": {
+          "type": "Number"
+        },
+
+
+
+        "chassis_up": {
+          "type": "Number"
+        },
+        "screw_up": {
+          "type": "Number"
+        },
+        "baguette_up": {
+          "type": "Number"
+        },
+        "disk_up": {
+          "type": "Number"
+        },
+        "paint_up": {
+          "type": "Number"
+        },
+        "ressort_up": {
+          "type": "Number"
+        },
+        "total": {
+          "type": "Number"
+        }
+
+      }
     }
+
   }
+  
+
 }
