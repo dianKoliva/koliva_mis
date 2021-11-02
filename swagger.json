@@ -224,11 +224,11 @@
         }
       },
       "delete": {
-        "summary": "Delete user with given ID",
-        "tags": ["Users"],
+        "summary": "Delete Form with given ID",
+        "tags": ["Forms"],
         "responses": {
           "200": {
-            "description": "User is deleted",
+            "description": "Form is deleted",
             "schema": {
               "type": "object"
             }
@@ -236,21 +236,46 @@
         }
       },
       "put": {
-        "summary": "Update user with give ID",
-        "tags": ["Users"],
+        "summary": "Update form with give ID",
+        "tags": ["Forms"],
         "parameters": [
           {
-            "name": "user",
+            "name": "form",
             "in": "body",
-            "description": "User with new values of properties",
+            "description": "Form with new values of properties",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Form"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "User is updated",
+            "description": "Form is updated",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User signup",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user registered!",
             "schema": {
               "type": "object"
             }
@@ -291,7 +316,7 @@
         "chassis_up","screw_up","baguette_up","disk_up","paint_up",
         "ressort_up"," total"
       ],
-      
+
       "properties": {
         "plate_no": {
           "type": "string"
