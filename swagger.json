@@ -171,6 +171,32 @@
         }
       }
     },
+
+    "/forms/regret": {
+      "post": {
+        "tags": ["Forms"],
+        "summary": "Form registration",
+        "parameters": [
+          {
+            "name": "form",
+            "in": "body",
+            "description": "Form that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Form"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New form registered!",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "/forms": {
       "get": {
         "tags": ["Forms"],
@@ -251,31 +277,6 @@
         "responses": {
           "200": {
             "description": "Form is updated",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/users/signup": {
-      "post": {
-        "tags": ["Users"],
-        "summary": "User signup",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User that we want to create",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "New user registered!",
             "schema": {
               "type": "object"
             }
