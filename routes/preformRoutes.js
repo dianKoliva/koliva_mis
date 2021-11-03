@@ -7,7 +7,7 @@ const formControl=require("../controllers/preform.js")
 
 const checker=require("../middle/check");
 
-router.get("/",formControl.getAll);
+router.get("/get",formControl.getAll);
 router.post("/register",checker,formControl.saveForm)
 router.get("/:id",checker,formControl.getById)
 
