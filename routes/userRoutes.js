@@ -14,13 +14,9 @@ router.post("/login",userControl.login)
 
 
 router.get('/',checker,userControl.getAllUsers )
-
 router.get('/:id',checker, userControl.getById)
-
-
-
-router.put("/:id",userControl.update)
-router.delete("/:id",userControl.deleteById);
+router.put("/:id",checker,userControl.update)
+router.delete("/:id",checker,userControl.deleteById);
 
 
 

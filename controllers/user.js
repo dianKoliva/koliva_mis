@@ -113,7 +113,7 @@ exports.login=(req,res,next)=>{
     .then(
         user=>{
             if(user.length<1){
-                return res.status(401)
+                return res.status(200)
                 .json({
                     message:"invalid user"
                 })
@@ -150,7 +150,8 @@ exports.login=(req,res,next)=>{
         err=>{
            
             res.status(500).json({
-                error:err
+                error:err,
+                
             })
         }
 
