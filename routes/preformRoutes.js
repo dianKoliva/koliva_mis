@@ -1,20 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var Form = require('../models/preformModel');
+var form =require("../controllers/preform");
 
 
-const formControl=require("../controllers/preform.js")
+router.post("/registe",form.saveForm)
+router.get('/',form.getAll)
+router.get('/:id',form.getById)
+router.put("/:id",form.update)
+router.delete("/:id",form.deleteById);
 
-const checker=require("../middle/check");
-
-router.get("/get",formControl.getAll);
-router.post("/register",checker,formControl.saveForm)
-router.get("/:id",checker,formControl.getById)
-
-router.put("/:id",checker,formControl.update);
-router.delete("/:id",checker,formControl.deleteById);
-
-
-
-
-module.exports = router;
+module.exports=router;

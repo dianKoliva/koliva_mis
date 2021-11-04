@@ -26,7 +26,8 @@ app.use(cors());
 
 
 app.use('/km/users', users);
-app.use('/km/forms', form);
+app.use('/km/forms',form);
+
 
 
 

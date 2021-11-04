@@ -6,7 +6,7 @@ var Form = require('../models/preformModel');
 
 const checker=require("../middle/check")
 
-exports.getAll=(checker,req, res,next) => {
+exports.getAll=(req, res,next) => {
 
     const pre= Form.find()
     .exec()
@@ -32,7 +32,7 @@ exports.getAll=(checker,req, res,next) => {
     
 }
 
-exports.saveForm=(checker,req, res,next) => {
+exports.saveForm=(req, res,next) => {
 
 const form =new Form({
     _id:new mongoose.Types.ObjectId(),
@@ -70,7 +70,7 @@ res.status(500).json({ error:err.message  }) } )
 
 }
 
-exports.getById=(checker,req, res,next) => {
+exports.getById=(req, res,next) => {
 
   
 
@@ -94,7 +94,7 @@ exports.getById=(checker,req, res,next) => {
     
 }
 
-exports.update=(checker,req,res,next)=>{
+exports.update=(req,res,next)=>{
     var id=req.params.id;
     const form= Form.findById(req.params.id)
     .exec()
@@ -187,3 +187,4 @@ exports.update=(checker,req,res,next)=>{
 
   
 }
+
